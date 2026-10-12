@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regla de tres</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f4f8;
+            text-align: center;
+            padding: 40px 15px;
+        }
+
+        .contenedor {
+            background: white;
+            max-width: 350px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px #cccccc;
+        }
+
+        h1 {
+            color: #2563eb;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0 15px;
+            border: 1px solid #cccccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        #resultado {
+            font-size: 22px;
+            font-weight: bold;
+            color: #15803d;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="contenedor">
+        <h1>Regla de tres</h1>
+
+        <p>Introduce los tres valores conocidos:</p>
+
+        <label for="a">Cantidad A:</label>
+        <input type="text" id="a" inputmode="decimal" placeholder="Valor A">
+
+        <label for="b">Le corresponde valor B:</label>
+        <input type="text" id="b" inputmode="decimal" placeholder="Valor B">
+
+        <label for="c">Nueva cantidad de A:</label>
+        <input type="text" id="c" inputmode="decimal" placeholder="Valor C">
+
+        <button onclick="calcular()">Calcular</button>
+
+        <div id="resultado"></div>
+    </div>
+
+    <script>
+        function calcular() {
+            const a = Number(
+                document.getElementById("a").value.replace(",", ".")
+            );
+
+            const b = Number(
+                document.getElementById("b").value.replace(",", ".")
+            );
+
+            const c = Number(
+                document.getElementById("c").value.replace(",", ".")
+            );
+
+            const resultado = document.getElementById("resultado");
+
+            if (
+                document.getElementById("a").value.trim() === "" ||
+                document.getElementById("b").value.trim() === "" ||
+                document.getElementById("c").value.trim() === "" ||
+                !Number.isFinite(a) ||
+                !Number.isFinite(b) ||
+                !Number.isFinite(c)
+            ) {
+                resultado.textContent = "Introduce los tres valores.";
+                return;
+            }
+
+            if (a === 0) {
+                resultado.textContent = "El valor A no puede ser cero.";
+                return;
+            }
+
+            const x = (b * c) / a;
+
+            resultado.textContent = "Resultado: " +
+                Number(x.toFixed(6)).toLocaleString("es-ES");
+        }
+    </script>
+
+</body>
+
+</html>
